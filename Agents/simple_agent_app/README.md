@@ -1,6 +1,7 @@
-🤖 Simple AI Agent — Streamlit App
+#🤖 Simple AI Agent — Streamlit App
 
 A lightweight Streamlit application that wraps a modular AI agent architecture.
+
 It cleanly separates:
 
 agent logic
@@ -60,18 +61,13 @@ OPENAI_API_KEY=your_key_here
 
 🚨 The app will raise an error if the key is missing — by design.
 
-📦 Installation
-git clone <repo-url>
-cd simple_agent_app
-
 pip install -r requirements.txt
 
 ▶️ Run the App
 streamlit run app.py
 
 
-Then open the URL shown in the terminal (usually http://localhost:8501
-).
+Then open the URL shown in the terminal (usually http://localhost:8501).
 
 🧭 How to Use
 
@@ -120,7 +116,9 @@ Create a virtual environment:
 
 python -m venv .venv
 source .venv/bin/activate      # macOS / Linux
-# or
+
+or
+
 .\.venv\Scripts\activate       # Windows
 
 ❓ Troubleshooting
@@ -144,7 +142,7 @@ Streamlit doesn’t refresh
 Press R in the Streamlit UI or restart the app.
 
 
-🐳 Docker Setup
+#🐳 Docker Setup
 
 You can run this Streamlit app fully containerized using Docker.
 
@@ -183,7 +181,6 @@ docker build -t <<your-docker-user>>/<<image-name>>:version .
 docker push <<your-docker-user>>/<<image-name>>:version
 
 Example:
-
 docker build -t subuppaluru71/simple-agent-app:latest .
 docker push subuppaluru71/simple-agent-app:latest
 
@@ -202,7 +199,7 @@ docker-compose building using below command.
 docker compose up --build
 
 
-Kubernetes Setup
+🐳 Kubernetes Setup
 
 Folder structure (recommended)
 k8s/
@@ -212,18 +209,11 @@ k8s/
   └── ingress.yaml   (optional)
 
 
-Assumes you already built and pushed your image, e.g.:
-
-
-
 Kubernetes Secret — API Key
-
 File: k8s/secret.yaml
 
 Generate base64 value for the openai api key using following powershell command: 
-
 powershell "[Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('<<openai_api_key>>'))"
-
 Paste the encoded string in the manifest file k8s/secret.yaml as plain text.
 
 Deployment File to run the Streamlit app
@@ -240,12 +230,10 @@ File: k8s/ingress.yaml
 Enable or start Kubernetes Cluster from docker desktop
 
 Install kubernetes client kubectl on windows using below powershell command.
-
-winget install -e --id Kubernetes.kubectl
+inget install -e --id Kubernetes.kubectl
 
 
 Apply kubernetes files in the folder k8s folder
-
 kubectl apply -f k8s/secret.yaml
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
