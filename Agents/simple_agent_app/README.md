@@ -1,4 +1,4 @@
-#🤖 Simple AI Agent — Streamlit App
+# 🤖 Simple AI Agent — Streamlit App
 
 A lightweight Streamlit application that wraps a modular AI agent architecture.
 
@@ -142,7 +142,7 @@ Streamlit doesn’t refresh
 Press R in the Streamlit UI or restart the app.
 
 
-#🐳 Docker Setup
+## 🐳 Docker Setup
 
 You can run this Streamlit app fully containerized using Docker.
 
@@ -192,14 +192,14 @@ docker run -p 8501:8501 \
   subuppaluru71/simple-agent-app:latest
 
 
-🐳 Docker Compose setup
+## 🐳 Docker Compose setup
 create a docker-compose.yml file
 
 docker-compose building using below command.
 docker compose up --build
 
 
-🐳 Kubernetes Setup
+## <img width="60" height="80" alt="image" src="https://github.com/user-attachments/assets/062c25b5-91ff-4b28-8afd-c961111b0dec" /> Kubernetes Setup
 
 Folder structure (recommended)
 k8s/
@@ -255,11 +255,5 @@ kubectl get ingress
 
 open the app using kubernetes using below:
 kubectl port-forward svc/simple-agent-service 8501:80
+
 Browse: http://localhost:8501/
-
-
-
-📄 License
-
-Use freely for learning, demos, and internal projects.
-Add your preferred license here if publishing.
