@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-agent-app
+  labels:
+    app: simple-agent-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simple-agent-app
+  template:
+    metadata:
+      labels:
+        app: simple-agent-app
+    spec:
+      containers:
+        - name: app
+          #image: simple-agent-app:latest
+          image: subuppaluru71/simple-agent-app:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: agent-secrets
+                  key: OPENAI_API_KEY
+          ports:
+            - containerPort: 8501
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8501
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8501
+            initialDelaySeconds: 10
+            periodSeconds: 20

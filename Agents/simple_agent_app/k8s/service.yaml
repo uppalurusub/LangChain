@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-agent-service
+spec:
+  selector:
+    app: simple-agent-app
+  ports:
+    - port: 80
+      targetPort: 8501
+      protocol: TCP
+  type: ClusterIP
