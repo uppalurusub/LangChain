@@ -1,6 +1,7 @@
-🤖 Simple AI Agent — Streamlit App
+# 🤖 Simple AI Agent — Streamlit App
 
 A lightweight Streamlit application that wraps a modular AI agent architecture.
+
 It cleanly separates:
 
 agent logic
@@ -24,17 +25,9 @@ So you can extend, debug, and maintain it easily.
 🧪 Easy to extend with tools, memory, logging, etc.
 
 📁 Project Structure
-simple_agent_app/
-│
-├── app.py
-├── core/
-│   ├── __init__.py
-│   ├── config.py
-│   ├── agent.py
-│   └── utils.py
-│
-├── requirements.txt
-└── README.md
+
+
+<img width="205" height="277" alt="image" src="https://github.com/user-attachments/assets/39acc0c9-7d97-4f32-b9e0-ba7bdd2fe15e" />
 
 
 app.py – Streamlit UI
@@ -60,18 +53,13 @@ OPENAI_API_KEY=your_key_here
 
 🚨 The app will raise an error if the key is missing — by design.
 
-📦 Installation
-git clone <repo-url>
-cd simple_agent_app
-
 pip install -r requirements.txt
 
 ▶️ Run the App
 streamlit run app.py
 
 
-Then open the URL shown in the terminal (usually http://localhost:8501
-).
+Then open the URL shown in the terminal (usually http://localhost:8501).
 
 🧭 How to Use
 
@@ -120,7 +108,9 @@ Create a virtual environment:
 
 python -m venv .venv
 source .venv/bin/activate      # macOS / Linux
-# or
+
+or
+
 .\.venv\Scripts\activate       # Windows
 
 ❓ Troubleshooting
@@ -144,7 +134,7 @@ Streamlit doesn’t refresh
 Press R in the Streamlit UI or restart the app.
 
 
-🐳 Docker Setup
+## 🐳 Docker Setup
 
 You can run this Streamlit app fully containerized using Docker.
 
@@ -157,63 +147,65 @@ avoids leaking API keys
 runs Streamlit in headless mode
 
 Docker Login 
+
 docker login -u <<user-name>>
 
 Build the Docker image for Local
+
 docker build -t <<image-name>> .
 
 Example:
+
 docker build -t simple-agent-app .
 
 
 Run the container
+
 Pass your API key securely using environment variables:
-docker run -p 8501:8501 \
-  -e OPENAI_API_KEY=your_key_here \
-  simple-agent-app
+
+docker run -p 8501:8501 -e OPENAI_API_KEY=your_key_here simple-agent-app
 
 Open the app in your browser:
+
 http://localhost:8501
 
 
 ✅ API keys are NOT stored in the image — they’re injected at runtime.
 
 Build the Docker image for Dockerhub
+
 docker build -t <<your-docker-user>>/<<image-name>>:version .
+
 docker push <<your-docker-user>>/<<image-name>>:version
 
 Example:
 
 docker build -t subuppaluru71/simple-agent-app:latest .
+
 docker push subuppaluru71/simple-agent-app:latest
 
 
 Run the container
+
 Pass your API key securely using environment variables:
-docker run -p 8501:8501 \
-  -e OPENAI_API_KEY=your_key_here \
-  subuppaluru71/simple-agent-app:latest
+
+docker run -p 8501:8501 -e OPENAI_API_KEY=your_key_here subuppaluru71/simple-agent-app:latest
 
 
-🐳 Docker Compose setup
+## 🐳 Docker Compose setup
+
 create a docker-compose.yml file
 
 docker-compose building using below command.
+
 docker compose up --build
 
 
-Kubernetes Setup
+## <img width="60" height="80" alt="image" src="https://github.com/user-attachments/assets/062c25b5-91ff-4b28-8afd-c961111b0dec" /> Kubernetes Setup
 
 Folder structure (recommended)
-k8s/
-  ├── deployment.yaml
-  ├── service.yaml
-  ├── secret.yaml
-  └── ingress.yaml   (optional)
 
-
-Assumes you already built and pushed your image, e.g.:
-
+<img width="275" height="132" alt="image" src="https://github.com/user-attachments/assets/b25b6885-b897-4473-8eb9-169f9ead19de" />
 
 
 Kubernetes Secret — API Key
@@ -227,51 +219,57 @@ powershell "[Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('<<o
 Paste the encoded string in the manifest file k8s/secret.yaml as plain text.
 
 Deployment File to run the Streamlit app
+
 File: k8s/deployment.yaml
 
 Service — expose the app inside the cluster
+
 File: k8s/service.yaml
 
 
 (Optional) Ingress — expose publicly
+
 Requires an ingress controller (Nginx, Cloud provider, etc.)
+
 File: k8s/ingress.yaml
 
 Enable or start Kubernetes Cluster from docker desktop
 
 Install kubernetes client kubectl on windows using below powershell command.
 
-winget install -e --id Kubernetes.kubectl
+inget install -e --id Kubernetes.kubectl
 
 
 Apply kubernetes files in the folder k8s folder
 
 kubectl apply -f k8s/secret.yaml
+
 kubectl apply -f k8s/deployment.yaml
+
 kubectl apply -f k8s/service.yaml
+
 kubectl apply -f k8s/ingress.yaml   # optional
 
 Verify pods:
+
 kubectl get pods
 
 Verify Logs:
+
 kubectl logs -l app=simple-agent-app
 
 Verify Service:
+
 kubectl get svc simple-agent-service
 
 
 Verify Ingress:
+
 kubectl get ingress
 
 
 open the app using kubernetes using below:
+
 kubectl port-forward svc/simple-agent-service 8501:80
+
 Browse: http://localhost:8501/
-
-
-
-📄 License
-
-Use freely for learning, demos, and internal projects.
-Add your preferred license here if publishing.
